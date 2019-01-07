@@ -1,3 +1,12 @@
+# Important!
+This is an attempt to re-write the IMPALA tensorflow code in pytorch.
+This is an experiment. This is a polite way to say that this code has not been tested anywhere except on the machine it was written on.
+No-one should be using it in production for quite some time, or complain when their system halts, melts and catches fire.
+You have been warned.
+If you wish to contribute or (when this thing becomes more mature) take over maintenance, please create pull requests.
+
+
+
 # Our Tweak of IMPALA
 Our tweak of the Deep Reinforcement Learning algorithm [IMPALA](https://github.com/deepmind/scalable_agent).
 We modify the original code to support:
@@ -9,7 +18,7 @@ We modify the original code to support:
 
 ## Dependencies
 Install the following python packages:
-* `tensorflow`
+* `pytorch`
 * [`horovod`](https://github.com/uber/horovod)
 * `dm-sonnet`
 * [`gym`](https://github.com/openai/gym#atari) (with Atari installed)

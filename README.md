@@ -20,7 +20,7 @@ We modify the original code to support:
 Install the following python packages:
 * `pytorch`
 * [`horovod`](https://github.com/uber/horovod)
-* `dm-sonnet`
+* ~~`dm-sonnet`~~  -- sonnet is a library on top of tensorflow. we'll have to use something else (or, failing that, nothing at all)
 * [`gym`](https://github.com/openai/gym#atari) (with Atari installed)
 * `paramiko`
 * `libtmux`

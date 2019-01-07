@@ -23,9 +23,10 @@ import contextlib
 
 import numpy as np
 from six.moves import range
-import tensorflow as tf
+#import tensorflow as tf
+import torch
 try:
-  import horovod.tensorflow as hvd
+  import horovod.torch as hvd
   has_horovod = True
 except ImportError:
   has_horovod = False  # Actor does not need horovod

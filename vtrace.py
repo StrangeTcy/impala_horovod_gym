@@ -29,7 +29,7 @@ from __future__ import print_function
 
 import collections
 
-import tensorflow as tf
+import tensorflow as tf     #TODO:replace that
 
 nest = tf.contrib.framework.nest
 

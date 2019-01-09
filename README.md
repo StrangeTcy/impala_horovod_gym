@@ -1,8 +1,13 @@
 # Important!
 This is an attempt to re-write the IMPALA tensorflow code in pytorch.
-This is an experiment. This is a polite way to say that this code has not been tested anywhere except on the machine it was written on.
+
+This is an experiment. 
+
+This is a polite way to say that this code has not been tested anywhere except on the machine it was written on.
 No-one should be using it in production for quite some time, or complain when their system halts, melts and catches fire.
+
 You have been warned.
+
 If you wish to contribute or (when this thing becomes more mature) take over maintenance, please create pull requests.
 
 
@@ -22,14 +27,26 @@ Install the following python packages:
 * [`horovod`](https://github.com/uber/horovod)
 * ~~`dm-sonnet`~~  -- sonnet is a library on top of tensorflow. we'll have to use something else (or, failing that, nothing at all)
 * [`gym`](https://github.com/openai/gym#atari) (with Atari installed)
-* `paramiko`
-* `libtmux`
-* `opencv-python`
+* `paramiko`  -- some python/ssh magic. do we really need it? shouldn't horovod be enough?
+* `libtmux` -- scripting library for tmux. How're we using it?
+* `opencv-python` -- ok, that part might actually be necessary
 
-Note: the original IMPALA code is written in python 2.x,
+**Note**: the original IMPALA code is written in python 2.x,
 so we recommend you make a virtual environment of python 2.x and pip install the
 above packages.
 Also, you can simply do everything in docker, see description [here](docker/README.md)
+
+**Note for pytorch**: do re-write this code in pytorch, I'm using:
+* python 3.x
+
+and
+
+* anaconda.
+
+If it fails with actual real system-wide python, I'll probably fix that.
+
+Currently (possibly indefinitely) this code has not been tested in docker. 
+Please don't bother trying to run it there.
 
 ## Running the Code for Training
 We offer a couple of ways to run the training code, as described below.

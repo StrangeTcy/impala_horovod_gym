@@ -39,24 +39,47 @@ import vtrace   #TODO: see what's there
 
 nest = tf.contrib.framework.nest    #Ok, no simple analogue like torch.nest was found. We have to see how this thing is used
 
-flags = tf.app.flags
-FLAGS = tf.app.flags.FLAGS    #tf.app.flags is cool, but I think it could be replaced with a not-tensorflow-specific argparse
+#flags = tf.app.flags
+#FLAGS = tf.app.flags.FLAGS    #tf.app.flags is cool, but I think it could be replaced with a not-tensorflow-specific argparse
+import argparse
 
-flags.DEFINE_string('logdir', '/tmp/agent/', 'TensorFlow log directory.')
-flags.DEFINE_enum('mode', 'train', ['train', 'test'], 'Training or test mode.')
+def parse_args():
+    parser = argparse.ArgumentParser()
+    # actual arguments go here...
+    #flags.DEFINE_string('logdir', '/tmp/agent/', 'TensorFlow log directory.')
+    parser.add_argument('--logdir', type=string, default='/tmp/agent',
+                       help='Pytorch log directory')  #whoever keeps their logs in /tmp?
+    #flags.DEFINE_enum('mode', 'train', ['train', 'test'], 'Training or test mode.')
+    parser.add_argument('--mode', type=string, default='train',
+                       help='Training or test mode ("train", "test")') 
+    # Flags used for testing.
+    #flags.DEFINE_integer('test_num_episodes', 10, 'Number of episodes per level.')
+    parser.add_argument('--test_num_episodes', type=int, default=10,
+                       help='Number of episodes per level.') 
+    # Flags used for distributed training.
+    ## are these ports realy important?
+    #flags.DEFINE_string('learner_host', 'localhost:8001',
+    #                    'learner host, only one allowed.')
+    parser.add_argument('--learner_host', type='string', default='localhost:8001',
+                       help='learner host, only one allowed.')
+    #flags.DEFINE_string('actor_hosts', 'localhost:9001,localhosts:9002',
+    #                    'actor hosts.')
+    parser.add_argument('--actor_host', type='string', default='localhost:9001,localhost:9002',
+                       help='actor hosts.')
+    flags.DEFINE_integer('task', -1, 'Task id. Use -1 for local training.')
+    flags.DEFINE_enum('job_name', 'learner', ['ps', 'learner', 'actor'],
+                      'Job name.')
+    args = parser.parse_args()
+    return args
 
-# Flags used for testing.
-flags.DEFINE_integer('test_num_episodes', 10, 'Number of episodes per level.')
 
-# Flags used for distributed training.
-## are these ports realy important?
-flags.DEFINE_string('learner_host', 'localhost:8001',
-                    'learner host, only one allowed.')
-flags.DEFINE_string('actor_hosts', 'localhost:9001,localhosts:9002',
-                    'actor hosts.')
-flags.DEFINE_integer('task', -1, 'Task id. Use -1 for local training.')
-flags.DEFINE_enum('job_name', 'learner', ['ps', 'learner', 'actor'],
-                  'Job name.')
+
+
+
+
+
+
+
 
 
 # Training.

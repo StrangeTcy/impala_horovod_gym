@@ -1,4 +1,4 @@
-""" Agent zoo. Each agent is a Neural Network carrier """
+""" Agent zoo. Each agent is a Neural Network carrier """  #,--- what does that mean?
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -7,8 +7,8 @@ import collections
 import functools
 
 import sonnet as snt
-import tensorflow as tf
-nest = tf.contrib.framework.nest
+import tensorflow as tf   # we obviously cannot use these
+nest = tf.contrib.framework.nest  #we need to replace this
 
 
 AgentOutput = collections.namedtuple('AgentOutput',
@@ -72,7 +72,7 @@ class SimpleConvNetAgent(snt.AbstractModule):
     outputs, core_state = self.unroll(actions, env_outputs, core_state)
     return nest.map_structure(lambda t: tf.squeeze(t, 0), outputs), core_state
 
-  @snt.reuse_variables
+  @snt.reuse_variables    #this decorator stuff might be tricky to replace
   def unroll(self, actions, env_outputs, core_state):
     _, _, done, _ = env_outputs
 

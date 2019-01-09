@@ -31,16 +31,16 @@ try:
 except ImportError:
   has_horovod = False  # Actor does not need horovod
 
-import environments
-from agent import agent_factory
+import environments   #TODO: see what's there
+from agent import agent_factory   #TODO: see what's there
 import py_process
-import vtrace
+import vtrace   #TODO: see what's there
 
 
-nest = tf.contrib.framework.nest
+nest = tf.contrib.framework.nest    #Ok, no simple analogue like torch.nest was found. We have to see how this thing is used
 
 flags = tf.app.flags
-FLAGS = tf.app.flags.FLAGS
+FLAGS = tf.app.flags.FLAGS    #tf.app.flags is cool, but I think it could be replaced with a not-tensorflow-specific argparse
 
 flags.DEFINE_string('logdir', '/tmp/agent/', 'TensorFlow log directory.')
 flags.DEFINE_enum('mode', 'train', ['train', 'test'], 'Training or test mode.')
@@ -49,6 +49,7 @@ flags.DEFINE_enum('mode', 'train', ['train', 'test'], 'Training or test mode.')
 flags.DEFINE_integer('test_num_episodes', 10, 'Number of episodes per level.')
 
 # Flags used for distributed training.
+## are these ports realy important?
 flags.DEFINE_string('learner_host', 'localhost:8001',
                     'learner host, only one allowed.')
 flags.DEFINE_string('actor_hosts', 'localhost:9001,localhosts:9002',

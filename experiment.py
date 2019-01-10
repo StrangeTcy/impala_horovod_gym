@@ -66,9 +66,27 @@ def parse_args():
     #                    'actor hosts.')
     parser.add_argument('--actor_host', type='string', default='localhost:9001,localhost:9002',
                        help='actor hosts.')
-    flags.DEFINE_integer('task', -1, 'Task id. Use -1 for local training.')
-    flags.DEFINE_enum('job_name', 'learner', ['ps', 'learner', 'actor'],
-                      'Job name.')
+    #flags.DEFINE_integer('task', -1, 'Task id. Use -1 for local training.')
+    parser.add_argument('--task', type=int,
+                        help='Task id. Use -1 for local training.')
+    #flags.DEFINE_enum('job_name', 'learner', ['ps', 'learner', 'actor'],
+    #                  'Job name.')
+    parser.add_argument('--job_name', type='string', default='learner',
+                        help='Job name (ps, learner, actor)')
+    # Training.
+    #flags.DEFINE_integer('total_environment_frames', int(1e9),
+    #                     'Total environment frames to train for.')
+    parser.add_argument('--total_environment_frames', type=int, default=int(1e9),
+                        help='Total environment frames to train for.')
+    #flags.DEFINE_integer('batch_size', 2, 'Batch size for training.')
+    parser.add_argument('--batch_size', type=int, default=2,
+                        help='Batch size for training.')
+    #flags.DEFINE_integer('unroll_length', 100, 'Unroll length in agent steps.')
+    parser.add_argument('--unroll_length', type=int, default=100,
+                        help='Unroll length in agent steps.')
+    flags.DEFINE_integer('seed', 1, 'Random seed.')
+    flags.DEFINE_string('agent_name', 'SimpleConvNetAgent', 'agent name.')
+    flags.DEFINE_integer('queue_capacity', 1, 'Queue capacity.')
     args = parser.parse_args()
     return args
 
@@ -82,14 +100,7 @@ def parse_args():
 
 
 
-# Training.
-flags.DEFINE_integer('total_environment_frames', int(1e9),
-                     'Total environment frames to train for.')
-flags.DEFINE_integer('batch_size', 2, 'Batch size for training.')
-flags.DEFINE_integer('unroll_length', 100, 'Unroll length in agent steps.')
-flags.DEFINE_integer('seed', 1, 'Random seed.')
-flags.DEFINE_string('agent_name', 'SimpleConvNetAgent', 'agent name.')
-flags.DEFINE_integer('queue_capacity', 1, 'Queue capacity.')
+
 
 # Loss settings.
 flags.DEFINE_float('entropy_cost', 0.00025, 'Entropy cost/multiplier.')

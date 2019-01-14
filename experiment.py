@@ -87,6 +87,28 @@ def parse_args():
     flags.DEFINE_integer('seed', 1, 'Random seed.')
     flags.DEFINE_string('agent_name', 'SimpleConvNetAgent', 'agent name.')
     flags.DEFINE_integer('queue_capacity', 1, 'Queue capacity.')
+
+    # Loss settings.
+    #flags.DEFINE_float('entropy_cost', 0.00025, 'Entropy cost/multiplier.')
+    parser.add_argument('--entropy_cost', type=float, default=0.00025,
+                        help='Entropy cost/multiplier.')
+    #flags.DEFINE_float('baseline_cost', .5, 'Baseline cost/multiplier.')
+    parser.add_argument('--baseline_cost', type=float, default=0.5,
+                        help='Baseline cost/multiplier.')
+    #flags.DEFINE_float('discounting', .99, 'Discounting factor.')
+    parser.add_argument('--discounting', type=float, default=0.99,
+                        help='Discounting factor.')
+    #flags.DEFINE_enum('reward_clipping', 'abs_one', ['abs_one', 'soft_asymmetric'],
+    #                  'Reward clipping.')
+    parser.add_argument('--reward_clipping', type=string, default=abs_one,
+                        help='Reward clipping(abs_one, soft_asymmetric).')
+    #flags.DEFINE_float('gradients_clipping', -1.0,
+    #                   'Gradients clipping. Negative number means not clipping. ')
+    parser.add_argument('--gradients_clipping', type=float, default=-1.0,
+                        help='Gradients clipping. Negative number means not clipping. ')
+
+
+
     args = parser.parse_args()
     return args
 

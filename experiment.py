@@ -107,43 +107,34 @@ def parse_args():
     parser.add_argument('--gradients_clipping', type=float, default=-1.0,
                         help='Gradients clipping. Negative number means not clipping. ')
 
+    # Environment settings.
+    #flags.DEFINE_string('level_name', 'BreakoutNoFrameskip-v4',
+    #                    '''Level name or gym env name''')
+    parser.add_argument('--level_name', type=string, default='BreakoutNoFrameskip-v4',
+                        help='Level name or gym env name')
+    #flags.DEFINE_integer('width', 84, 'Width of observation.')
+    parser.add_argument('--width', type=int, default=84,
+                        help='Width of observation.')
+    #flags.DEFINE_integer('height', 84, 'Height of observation.')
+    parser.add_argument('--height', type=int, default=84,
+                        help='Height of observation.')
 
+    # Optimizer settings.
+    #flags.DEFINE_float('learning_rate', 0.00048, 'Learning rate.')
+    parser.add_argument('--learning_rate', type=float, default=0.00048,
+                        help='Learning rate.')
+    #flags.DEFINE_float('decay', .99, 'RMSProp optimizer decay.')
+    parser.add_argument('--decay', type=float, default=.99,
+                        help='RMSProp optimizer decay.')
+    #flags.DEFINE_float('momentum', 0., 'RMSProp momentum.')
+    parser.add_argument('--momentum', type=float, default=0.,
+                        help='RMSProp momentum.')
+    #flags.DEFINE_float('epsilon', .1, 'RMSProp epsilon.')
+    parser.add_argument('--epsilon', type=float, default=1.,
+                        help='RMSProp epsilon.')
 
     args = parser.parse_args()
     return args
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Loss settings.
-flags.DEFINE_float('entropy_cost', 0.00025, 'Entropy cost/multiplier.')
-flags.DEFINE_float('baseline_cost', .5, 'Baseline cost/multiplier.')
-flags.DEFINE_float('discounting', .99, 'Discounting factor.')
-flags.DEFINE_enum('reward_clipping', 'abs_one', ['abs_one', 'soft_asymmetric'],
-                  'Reward clipping.')
-flags.DEFINE_float('gradients_clipping', -1.0,
-                   'Gradients clipping. Negative number means not clipping. ')
-
-# Environment settings.
-flags.DEFINE_string('level_name', 'BreakoutNoFrameskip-v4',
-                    '''Level name or gym env name''')
-flags.DEFINE_integer('width', 84, 'Width of observation.')
-flags.DEFINE_integer('height', 84, 'Height of observation.')
-
-# Optimizer settings.
-flags.DEFINE_float('learning_rate', 0.00048, 'Learning rate.')
-flags.DEFINE_float('decay', .99, 'RMSProp optimizer decay.')
-flags.DEFINE_float('momentum', 0., 'RMSProp momentum.')
-flags.DEFINE_float('epsilon', .1, 'RMSProp epsilon.')
 
 
 # Structure to be sent from actors to learner.
